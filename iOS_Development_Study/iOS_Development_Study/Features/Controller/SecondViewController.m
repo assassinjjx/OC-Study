@@ -9,6 +9,7 @@
 
 
 @interface SecondViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *showLabel;
 
 @end
@@ -34,11 +35,15 @@
 //studyLabel初始化
 - (void)showLabelInit {
     self.showLabel.font = [UIFont systemFontOfSize:48];
+    NSLayoutConstraint *constraintCenterX = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeCenterX multiplier: 1.0 constant: 0];
+    NSLayoutConstraint *constraintCenterY = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeCenterY relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeCenterY multiplier: 1.0 constant: 0];
+    NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 120];
+    NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeHeight relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 60];
+    [self.view addConstraints: @[constraintWidth, constraintHeight, constraintCenterX, constraintCenterY]];
     self.showLabel.textColor = [UIColor redColor];
+    self.showLabel.frame = CGRectMake(0, 0, 120, 60);
     self.showLabel.text = @"Hello World!";
-    self.showLabel.frame = CGRectMake(0, 50, 350, 60);
     self.showLabel.numberOfLines = 0;
-    self.showLabel.tag = 101;
 }
 
 @end
