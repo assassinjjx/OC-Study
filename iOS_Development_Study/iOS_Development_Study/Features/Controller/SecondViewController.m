@@ -7,7 +7,6 @@
 
 #import "SecondViewController.h"
 
-
 @interface SecondViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *showLabel;
@@ -34,15 +33,16 @@
 
 //studyLabel初始化
 - (void)showLabelInit {
+    [self.showLabel mas_makeConstraints: ^(MASConstraintMaker* make) {
+        make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+        make.centerY.equalTo(self.view.mas_centerY).with.offset(0);
+        make.width.mas_equalTo(400);
+        make.height.mas_equalTo(70);
+    }];
     self.showLabel.font = [UIFont systemFontOfSize:48];
-    NSLayoutConstraint *constraintCenterX = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeCenterX multiplier: 1.0 constant: 0];
-    NSLayoutConstraint *constraintCenterY = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeCenterY relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeCenterY multiplier: 1.0 constant: 0];
-    NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 120];
-    NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem: self.showLabel attribute: NSLayoutAttributeHeight relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 60];
-    [self.view addConstraints: @[constraintWidth, constraintHeight, constraintCenterX, constraintCenterY]];
     self.showLabel.textColor = [UIColor redColor];
-    self.showLabel.frame = CGRectMake(0, 0, 120, 60);
-    self.showLabel.text = @"Hello World!";
+    self.showLabel.textAlignment = UIListContentTextAlignmentCenter;
+    self.showLabel.text = [self.dictionary valueForKey: @"text"];
     self.showLabel.numberOfLines = 0;
 }
 

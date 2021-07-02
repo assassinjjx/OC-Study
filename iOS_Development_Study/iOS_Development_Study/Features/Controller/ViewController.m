@@ -6,8 +6,6 @@
 //
 
 #import "ViewController.h"
-#import "SecondViewController.h"
-#import "ELYTToast.h"
 
 @interface ViewController ()
 
@@ -15,10 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *studyImageView;
 @property (weak, nonatomic) IBOutlet UIButton *studyButton;
 @property (weak, nonatomic) IBOutlet UITextField *studyTextField;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *studyTextFieldConstraintLeft;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *studyTextFieldConstraintRight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *studyButtonConstraintTop;
 
 @end
 
@@ -45,8 +39,15 @@
     [self viewInit];
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    
+    [self.navigationController setNavigationBarHidden: YES animated: YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear: animated];
+    [self.navigationController setNavigationBarHidden: NO animated: animated];
 }
 
 #pragma mark- Public Method
@@ -66,9 +67,8 @@
 - (void)onButtonClicked {
     UIStoryboard *sb = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     SecondViewController *showLabelViewController = [sb instantiateViewControllerWithIdentifier: @"showLabel"];
-    NSLog(@"button clicked:%@", showLabelViewController);
+    showLabelViewController.dictionary= [[NSDictionary alloc] initWithObjectsAndKeys: @"Hello World!", @"text", nil];
     [self.navigationController pushViewController:showLabelViewController animated:YES];
-    NSLog(@"button clicked1:%@", self.navigationController);
 }
 
 //输入框输入响应事件
@@ -88,35 +88,39 @@
 
 //studyLabel初始化
 - (void)studyLabelInit {
+    [self.studyLabel mas_makeConstraints: ^(MASConstraintMaker* make) {
+        make.top.equalTo(self.view.mas_top).with.offset(10);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.width.mas_equalTo(400);
+        make.height.mas_equalTo(70);
+    }];
     self.studyLabel.font = [UIFont systemFontOfSize:48];
     self.studyLabel.textColor = [UIColor redColor];
     self.studyLabel.text = @"Hello World!";
-    NSLayoutConstraint *constraintToTop = [NSLayoutConstraint constraintWithItem: self.studyLabel attribute: NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeTop multiplier: 1.0 constant: 0];
-    NSLayoutConstraint *constraintToLeft = [NSLayoutConstraint constraintWithItem: self.studyLabel attribute: NSLayoutAttributeLeft relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeLeft multiplier: 1.0 constant: 0];
-    NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem: self.studyLabel attribute: NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 350];
-    NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem: self.studyLabel attribute: NSLayoutAttributeHeight relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 60];
-    [self.view addConstraints: @[constraintToTop, constraintToLeft, constraintWidth, constraintHeight]];
     self.studyLabel.numberOfLines = 0;
     self.studyLabel.tag = 101;
 }
 
 //studyImageView初始化
 - (void)studyImageViewInit {
-    NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem: self.studyImageView attribute: NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 320];
-    NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem: self.studyImageView attribute: NSLayoutAttributeHeight relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 180];
-    NSLayoutConstraint *constraintCenterX = [NSLayoutConstraint constraintWithItem: self.studyImageView attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeCenterX multiplier: 1.0 constant: 0];
-    NSLayoutConstraint *constraintToTop = [NSLayoutConstraint constraintWithItem: self.studyImageView attribute: NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeTop multiplier: 1.0 constant: -100];
-    [self.view addConstraints: @[constraintWidth, constraintHeight, constraintCenterX, constraintToTop]];
+    [self.studyImageView mas_makeConstraints: ^(MASConstraintMaker* make) {
+        make.top.equalTo(self.view.mas_top).with.offset(250);
+        make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+        make.width.mas_equalTo(320);
+        make.height.mas_equalTo(180);
+    }];
     self.studyImageView.tag = 102;
 }
 
 //studyButton初始化
 - (void)studyButtonInit {
+    [self.studyButton mas_makeConstraints: ^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(450); //with is an optional semantic filler
+        make.centerX.equalTo(self.view.mas_centerX).with.offset(0);
+        make.width.mas_equalTo(120);
+        make.height.mas_equalTo(60);
+    }];
     self.studyButton.titleLabel.font = [UIFont systemFontOfSize:24];
-    NSLayoutConstraint *constraintCenterX = [NSLayoutConstraint constraintWithItem: self.studyButton attribute: NSLayoutAttributeCenterX relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeCenterX multiplier: 1.0 constant: 0];
-    NSLayoutConstraint *constraintWidth = [NSLayoutConstraint constraintWithItem: self.studyButton attribute: NSLayoutAttributeWidth relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 120];
-    NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem: self.studyButton attribute: NSLayoutAttributeHeight relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 60];
-    [self.view addConstraints: @[constraintCenterX, constraintWidth, constraintHeight]];
     self.studyButton.backgroundColor = [UIColor blueColor];
     [self.studyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //关闭高亮效果
@@ -128,9 +132,12 @@
 
 //studyTextField初始化
 - (void)studyTextFieldInit {
-    NSLayoutConstraint *constraintToTop = [NSLayoutConstraint constraintWithItem: self.studyTextField attribute: NSLayoutAttributeTop relatedBy: NSLayoutRelationEqual toItem: self.view attribute: NSLayoutAttributeTop multiplier: 1.0 constant: 550];
-    NSLayoutConstraint *constraintHeight = [NSLayoutConstraint constraintWithItem: self.studyTextField attribute: NSLayoutAttributeHeight relatedBy: NSLayoutRelationEqual toItem: nil attribute: NSLayoutAttributeNotAnAttribute multiplier: 1.0 constant: 40];
-    [self.view addConstraints: @[constraintToTop, constraintHeight]];
+    [self.studyTextField mas_makeConstraints: ^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(550); //with is an optional semantic filler
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.right.equalTo(self.view.mas_right).with.offset(0);
+        make.height.mas_equalTo(40);
+    }];
     self.studyTextField.placeholder = @"Please input something!";
     self.studyTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.studyTextField.tag = 104;

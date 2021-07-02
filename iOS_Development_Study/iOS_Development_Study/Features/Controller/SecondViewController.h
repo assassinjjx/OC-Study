@@ -6,8 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Masonry.h"
 
 @interface SecondViewController : UIViewController
 
+@property (strong, nonatomic) NSDictionary *dictionary;
 
 @end
