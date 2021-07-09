@@ -6,6 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "MyBoardView.h"
 #import "Masonry.h"
 
 @interface SecondViewController : UIViewController
