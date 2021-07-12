@@ -58,12 +58,10 @@
 #pragma mark- Public Method
 #pragma mark- Delegate
 #pragma mark- Event Response
-//取消studyTextField第一响应
 - (void)keyboardHide:(UITapGestureRecognizer*)tap {
     [_studyTextField resignFirstResponder];
 }
 
-//手势点击studyImageView的Toast响应
 - (void)onIMageViewClicked:(UITapGestureRecognizer*)tap {
     [ELYTToast showTopWithText: @"Hello World!"];
 }
@@ -83,7 +81,6 @@
     }
 }
 
-//按钮点击跳转事件
 - (void)onButtonClicked {
     UIStoryboard *sb = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
     SecondViewController *showLabelViewController = [sb instantiateViewControllerWithIdentifier: @"showLabel"];
@@ -91,7 +88,6 @@
     [self.navigationController pushViewController:showLabelViewController animated:YES];
 }
 
-//输入框输入响应事件
 - (void)textFieldDidChange: (UITextField *)textField {
     self.studyLabel.text = textField.text;
 }

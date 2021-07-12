@@ -173,15 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmq-CQ-VTz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1588.4057971014495" y="99.776785714285708"/>
-        </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="EYx-nl-k6h">
-            <objects>
-                <avPlayerViewController storyboardIdentifier="player" videoGravity="AVLayerVideoGravityResizeAspect" id="B3T-Fa-lQw" customClass="PlayerViewController" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CkU-Ac-i80" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2322" y="108"/>
+            <point key="canvasLocation" x="1575" y="80"/>
         </scene>
         <!--Thread View Controller-->
         <scene sceneID="x50-c3-1dy">
@@ -237,7 +229,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hc-D1-3az" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3156.521739130435" y="95.758928571428569"/>
+            <point key="canvasLocation" x="2333" y="80"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="I8d-fb-MBY">
+            <objects>
+                <avPlayerViewController storyboardIdentifier="player" videoGravity="AVLayerVideoGravityResizeAspect" id="wDQ-ln-ECL" customClass="PlayerViewController" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V4i-Ub-8pT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3071" y="80"/>
         </scene>
     </scenes>
     <resources>
