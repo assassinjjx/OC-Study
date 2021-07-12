@@ -15,6 +15,7 @@
 
 @implementation PlayerViewController
 
+#pragma mark- Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -22,6 +23,9 @@
     [self studyPlayerInit];
 }
 
+#pragma mark- Public Method
+#pragma mark- Delegate
+#pragma mark- Event Response
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if ([object isKindOfClass:[AVPlayerItem class]]) {
         if ([keyPath isEqualToString:@"status"]) {
@@ -43,6 +47,8 @@
     }
 }
 
+#pragma mark- Getters and Setters
+#pragma mark- Private Method
 - (void)studyPlayerInit {
     NSURL * videoUrl = [NSURL URLWithString:@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"];
     self.studyPlayerItem = [[AVPlayerItem alloc] initWithURL:videoUrl];
